@@ -227,6 +227,85 @@
                 searchMessage.textContent =
                     "Search for a destination to get started.";
             });
+        
+<script>
+const searchInput =
+  document.getElementById("destinationInput");
+
+const searchMessage =
+  document.getElementById("searchMessage");
+
+const results =
+  document.getElementById("results");
+
+document.getElementById("searchBtn")
+  .addEventListener("click", function () {
+
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (query.includes("beach")) {
+      searchMessage.textContent =
+        "Here are our recommended beaches:";
+
+      document.querySelectorAll(".beach-card")
+        .forEach(card => card.remove());
+
+      const beaches = [
+        {
+          name: "Bali Beach, Indonesia",
+          description:
+            "Beautiful tropical beaches with crystal-clear water.",
+          image:
+            "https://images.unsplash.com/photo-1537996194471-e657df975ab4"
+        },
+        {
+          name: "Maldives Beach",
+          description:
+            "White sandy beaches, turquoise waters and relaxing views.",
+          image:
+            "https://images.unsplash.com/photo-1514282401047-d79a71a590e8"
+        }
+      ];
+
+      beaches.forEach(beach => {
+        const card = document.createElement("div");
+        card.className = "beach-card";
+
+        const image = document.createElement("img");
+        image.src = beach.image;
+        image.alt = beach.name;
+
+        const title = document.createElement("h3");
+        title.textContent = beach.name;
+
+        const description = document.createElement("p");
+        description.textContent = beach.description;
+
+        card.append(image, title, description);
+        results.appendChild(card);
+      });
+
+    } else {
+      document.querySelectorAll(".beach-card")
+        .forEach(card => card.remove());
+
+      searchMessage.textContent =
+        "Try searching for beach.";
+    }
+  });
+
+document.getElementById("clearBtn")
+  .addEventListener("click", function () {
+    searchInput.value = "";
+
+    document.querySelectorAll(".beach-card")
+      .forEach(card => card.remove());
+
+    searchMessage.textContent =
+      "Search for a destination to get started.";
+  });
+</script>
+
     </script>
 
 </body>
